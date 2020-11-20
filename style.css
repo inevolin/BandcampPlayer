@@ -1,0 +1,138 @@
+body {
+  background-color: #eee;
+  transition: background-color .5s;
+}
+
+.player {
+  /*height: 95vh;*/
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.track-art {
+  margin: 25px;
+  height: 150px;
+  width: 150px;
+  background-image: url("https://avatars0.githubusercontent.com/u/9488406?s=460&u=dd6736104431e94c9448c458220d7e74cb2f42c9&v=4");
+  background-size: cover;
+  border-radius: 15%;
+}
+
+.now-playing {
+  margin-top:10px;
+}
+
+.track-name {
+}
+
+.track-artist {
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.playpause-track, .prev-track, .next-track {
+  padding: 25px;
+  opacity: 0.8;
+
+  /* Smoothly transition the opacity */
+  transition: opacity .2s;
+}
+
+.playpause-track:hover, .prev-track:hover, .next-track:hover {
+  opacity: 1.0;
+}
+
+.slider_container {
+  width: 75%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modify the appearance of the slider */
+.seek_slider, .volume_slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: black;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Modify the appearance of the slider thumb */
+.seek_slider::-webkit-slider-thumb, .volume_slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.seek_slider:hover, .volume_slider:hover {
+  opacity: 1.0;
+}
+
+.seek_slider {
+  width: 60%;
+}
+
+.volume_slider {
+  width: 30%;
+}
+
+.current-time, .total-duration {
+  padding: 10px;
+}
+
+i.fa-volume-down, i.fa-volume-up {
+  padding: 10px;
+}
+
+i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
+  cursor: pointer;
+}
+
+.genres, .subgenres, .releasetypes {
+  display: flex;
+  white-space: nowrap;
+}
+.genres a, .subgenres a, .releasetypes a {
+  margin: 10px;
+  color: #666;
+}
+
+.parent-genres, .parent-subgenres, .parent-releasetypes {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.parent-genres {
+  background-color: #f8f8f8;
+}
+.parent-subgenres {
+  background-color: #f4f4f4;
+}
+.parent-releasetypes {
+  background-color: #f0f0f0;
+}
