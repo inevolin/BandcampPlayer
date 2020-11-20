@@ -11,3 +11,7 @@ This player was created to simplify music discovery and listen to Bandcamp's rec
 4. Optionally select filter type: top or latest tracks
 
 ![demo screenshot](https://i.imgur.com/XEJR5yT.png)
+
+## Contact & Support
+Name: Ilya Nevolin
+Email: ilja.nevolin@gmail.com
