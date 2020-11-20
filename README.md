@@ -14,4 +14,5 @@ This player was created to simplify music discovery and listen to Bandcamp's rec
 
 ## Contact & Support
 Name: Ilya Nevolin
+
 Email: ilja.nevolin@gmail.com
