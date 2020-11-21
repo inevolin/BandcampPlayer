@@ -29,7 +29,6 @@
           <a href="#" data-id="new">new arrivals</a>
         </div>
       </div>
-      <div class="now-playing"></div>
       <div class="track-art"></div>
       <div class="track-name"></div>
       <div class="track-album"></div>
@@ -51,6 +50,17 @@
       <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
       <i class="fa fa-volume-up"></i>
     </div>
+
+    <table class="table-scroll small-first-col">
+      <thead>
+        <tr>
+          <th>Track <span class="now-playing"></span></th>
+        </tr>
+      </thead>
+      <tbody class="playlist">
+      </tbody>
+    </table>
+
   </div>
 </body>
 </html>

@@ -4,11 +4,11 @@ body {
 }
 
 .player {
-  /*height: 95vh;*/
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .details {
@@ -48,8 +48,6 @@ body {
 .playpause-track, .prev-track, .next-track {
   padding: 25px;
   opacity: 0.8;
-
-  /* Smoothly transition the opacity */
   transition: opacity .2s;
 }
 
@@ -65,7 +63,6 @@ body {
   align-items: center;
 }
 
-/* Modify the appearance of the slider */
 .seek_slider, .volume_slider {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -77,7 +74,6 @@ body {
   transition: opacity .2s;
 }
 
-/* Modify the appearance of the slider thumb */
 .seek_slider::-webkit-slider-thumb, .volume_slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -135,4 +131,48 @@ i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
 }
 .parent-releasetypes {
   background-color: #f0f0f0;
+}
+
+.table-scroll{
+  display: block;
+  empty-cells: show;
+  border-spacing: 0;
+  border: 1px solid;
+  max-width: 500px;
+  width: 100%;
+}
+
+.table-scroll thead{
+  background-color: #f1f1f1;  
+  position:relative;
+  display: block;
+  width:100%;
+}
+
+.table-scroll tbody{
+  display: block;
+  position:relative;
+  width:100%;
+  overflow-y:scroll;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.table-scroll tr{
+  width: 100%;
+  display:flex;
+}
+
+.table-scroll td,.table-scroll th{
+  flex-basis:100%;
+  flex-grow:2;
+  display: block;
+  padding: 5px 10px;
+  text-align:left;
+}
+
+.table-scroll .playlist {
+  max-height: 50vh;
+}
+.playlist tr td a {
+  color: #666;
 }
