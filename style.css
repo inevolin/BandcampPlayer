@@ -181,3 +181,12 @@ i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
   display: none;
   float: right;
 }
+
+.randomtrack {
+  color: #666;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.randomtrack:hover {
+  opacity: 0.8;
+}

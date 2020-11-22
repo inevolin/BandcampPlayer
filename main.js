@@ -17,6 +17,7 @@ let track_index = 0;
 let track_page = 0;
 let isPlaying = false;
 let updateTimer;
+let randomize = false;
 
 let curr_track = document.createElement('audio');
 
@@ -79,6 +80,11 @@ function nextTrack() {
   if (track_index < track_list.length - 1)
     track_index += 1;
   else track_index = 0;
+
+  if (randomize) {
+    track_index = getRandomInt(0, track_list.length-1)
+  }
+
   loadTrack(track_index);
   playTrack();
 }
@@ -181,8 +187,23 @@ $(document).ready(function() {
         track_page++;
         loadFeaturedTracks(false)
     })
-    
+
+    $('body').on('click', '.randomtrack', function(e) {
+        e.preventDefault()
+        randomize = !randomize;
+        if (randomize) {
+          $('.randomtrack').css({color: 'green'})
+          nextTrack()
+        } else {
+          $('.randomtrack').css({color: '#666'})
+        }
+    })
 })
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min; // [min, max]
+}
+
 function loadFeaturedTracks(clean) {
     if (clean) {
       track_page = 0;
