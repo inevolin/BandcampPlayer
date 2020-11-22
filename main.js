@@ -1,4 +1,3 @@
-let now_playing = document.querySelector(".now-playing");
 let track_art = document.querySelector(".track-art");
 let track_name = document.querySelector(".track-name");
 let track_album = document.querySelector(".track-album");
@@ -15,15 +14,13 @@ let curr_time = document.querySelector(".current-time");
 let total_duration = document.querySelector(".total-duration");
 
 let track_index = 0;
-let track_count = 0;
+let track_page = 0;
 let isPlaying = false;
 let updateTimer;
 
 let curr_track = document.createElement('audio');
 
-let track_list = [
-];
-
+let track_list = [];
 
 function loadTrack(track_index) {
   if (!track_list.length) return;
@@ -39,14 +36,17 @@ function loadTrack(track_index) {
   track_artist.textContent = track_list[track_index].artist;
   track_url.textContent = 'Album URL'
   track_url.href = track_list[track_index].url;
-  now_playing.textContent = 'playing ' + (track_index + 1) + " / " + track_list.length;
+  updatePlayingStatus();
 
   updateTimer = setInterval(seekUpdate, 1000);
   curr_track.addEventListener("ended", nextTrack);
 
-
   $('.playlist tr td a').css({'font-weight': '100', color: '#666'})
   $('.playlist tr td a[data-id='+track_index+']').css({'font-weight': 'bold', color: 'black'})
+}
+
+function updatePlayingStatus() {
+  $(".now-playing").text('playing ' + (track_index + 1) + " / " + track_list.length);
 }
 
 function resetValues() {
@@ -54,7 +54,6 @@ function resetValues() {
   total_duration.textContent = "00:00";
   seek_slider.value = 0;
 }
-
 
 function playpauseTrack() {
   if (!track_list.length) return;
@@ -149,7 +148,7 @@ $(document).ready(function() {
                 $('.subgenres').append('<a href="#'+val.norm_name+'" data-id="'+val.norm_name+'">'+val.name+'</a> ');
             })
 
-        loadFeaturedTracks()
+        loadFeaturedTracks(true)
         $('.releasetypes').show()
     })
 
@@ -158,7 +157,7 @@ $(document).ready(function() {
         subgenreid = $(this).data().id
         $('.subgenres a').css({'font-weight': '100', color: '#666'})
         $(this).css({'font-weight': 'bold', color: 'black'})
-        loadFeaturedTracks()
+        loadFeaturedTracks(true)
     })
 
     $('.releasetypes a:first').css({'font-weight': 'bold', color: 'black'})
@@ -167,9 +166,8 @@ $(document).ready(function() {
         releasetypes = $(this).data().id;
         $('.releasetypes a').css({'font-weight': '100', color: '#666'})
         $(this).css({'font-weight': 'bold', color: 'black'})
-        loadFeaturedTracks()
+        loadFeaturedTracks(true)
     })
-
 
     $('body').on('click', '.playlist tr td a', function(e) {
         e.preventDefault()
@@ -177,13 +175,22 @@ $(document).ready(function() {
         loadTrack(track_index)
         playTrack()
     })
+
+    $('body').on('click', '.load-more', function(e) {
+        e.preventDefault()
+        track_page++;
+        loadFeaturedTracks(false)
+    })
     
 })
-function loadFeaturedTracks() {
+function loadFeaturedTracks(clean) {
+    if (clean) {
+      track_page = 0;
+    }
     let url = 'https://bandcamp.com/api/discover/3/get_web';
     url += '?g=' + genreid
     url += '&gn=0'
-    url += '&p=0'
+    url += '&p=' + track_page
     url += '&s=' + releasetypes // top, new, rec
     url += '&f=all'
     if (!subgenreid)
@@ -195,10 +202,11 @@ function loadFeaturedTracks() {
         type: 'GET',
         dataType: 'jsonp',
     }).done(function(data) {
-        
-        $('.playlist').empty()
-        track_list = []
-        track_count = 0
+        if (clean) {
+          $('.playlist').empty()
+          track_list = []
+          track_index = 0;
+        }
         $.each(data.items, function(idx, ft) {
             let oft = {
                 name: ft.featured_track.title,
@@ -210,16 +218,24 @@ function loadFeaturedTracks() {
             }
             track_list.push(oft)
             addToPlaylistTable(ft)
-            track_count++;
-        })
-        loadTrack(0);
-        track_index = 0;
-        playTrack();
+        });
 
+        if (data.items.length < 48)
+          $('.load-more').hide()
+        else
+          $('.load-more').show()
+
+        if (clean) {
+          loadTrack(track_index);
+          playTrack();
+        } else {
+          updatePlayingStatus()
+        }
     })
 }
+
 function addToPlaylistTable(ft) {
-  let el = '<a href="#" data-id=' + track_count + '>' + (track_count+1) + '. ' +  ft.featured_track.title + ' - ' + ft.secondary_text + '</a>'
+  let el = '<a href="#" data-id=' + (track_list.length-1)+ '>' + (track_list.length) + '. ' +  ft.featured_track.title + ' - ' + ft.secondary_text + '</a>'
   let td = '<td>'+el+'</td>'
   let tr = '<tr>'+td+'</tr>'
   $('.playlist').append(tr)
