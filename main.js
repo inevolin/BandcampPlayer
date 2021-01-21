@@ -198,6 +198,24 @@ $(document).ready(function() {
           $('.randomtrack').css({color: '#666'})
         }
     })
+
+    // media keys
+    navigator.mediaSession.setActionHandler('previoustrack', function() {
+      prevTrack();
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', function() {
+      nextTrack();
+    });
+    navigator.mediaSession.setActionHandler('play', function() {
+      playpauseTrack();
+    });
+
+    navigator.mediaSession.setActionHandler('pause', function() {
+      playpauseTrack();
+    });
+
+
 })
 
 function getRandomInt(min, max) {
