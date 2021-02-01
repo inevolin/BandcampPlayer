@@ -12,7 +12,11 @@ This player was created to simplify music discovery and listen to Bandcamp's rec
 
 ![demo screenshot](https://i.imgur.com/XEJR5yT.png)
 
-## Contact & Support
-Name: Ilya Nevolin
+## Contact
+
+For enquiries or issues get in touch with me:
+
+Name: [Ilya Nevolin](https://www.linkedin.com/in/iljanevolin/)
 
 Email: ilja.nevolin@gmail.com
+
